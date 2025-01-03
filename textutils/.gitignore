@@ -1,6 +1,6 @@
 # Python virtual environments
-venv/
-.venv/
+django_project/
+.django_project/
 
 # Byte-compiled files
 *.pyc
