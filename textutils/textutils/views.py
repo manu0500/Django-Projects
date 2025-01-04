@@ -66,7 +66,11 @@ def analyze(request):
     
     dic1 = {'analyzed_text' : analyzed_text, 'purpose' : purpose}
     return render(request, 'analyze.html', dic1)
-    
+def contact(request):
+    return render(request, 'contact.html')
+def about(request):
+    return render(request, 'about.html')
+
 
 
 
