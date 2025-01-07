@@ -21,7 +21,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name = 'index'),
-    path('analyze/', views.analyze, name = 'analyze'),
+    path('analyze', views.analyze, name = 'analyze'),
     path('contact/', views.contact, name = 'contact'),
     path('about/', views.about, name = 'about'),
     # path('space_remove/', views.space_remove, name = 'spaceremove'),

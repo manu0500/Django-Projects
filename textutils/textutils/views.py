@@ -5,14 +5,14 @@ def index(request):
     return render(request, 'index.html')   
    # return HttpResponse("<h1>Company Name</h1><a href = '/products'>Products</a><br><a href = 'http://127.0.0.1:8000/career'>Career</a><br><a href = 'http://127.0.0.1:8000/about'>About</a><br><a href = 'http://127.0.0.1:8000/contact'>Contact Us</a>")
 def analyze(request):
-    d_text = request.GET.get('text','default')
+    d_text = request.POST.get('text','default')
     print(d_text) # getting text from textarea and printing
     purpose = ""
-    removepunc = request.GET.get('removepunc','off')
-    capitalize = request.GET.get('capitalize','off')  
-    removenewline = request.GET.get('removenewline','off')  
-    remove_extraspace = request.GET.get('remove_extraspace','off')
-    char_count = request.GET.get('char_count','off')
+    removepunc = request.POST.get('removepunc','off')
+    capitalize = request.POST.get('capitalize','off')  
+    removenewline = request.POST.get('removenewline','off')  
+    remove_extraspace = request.POST.get('remove_extraspace','off')
+    char_count = request.POST.get('char_count','off')
     if removepunc == 'on':
         symbol =''' '" ! @ # $ % ^ & * ( ) - _ = + \ | [ ] { } ; : / ? . >'''
         analyzed_text = ""
@@ -52,7 +52,7 @@ def analyze(request):
         purpose = purpose  + "New Line Character is Removed\n"
         temp_analyse_text = ""
         for char in analyzed_text:
-            if char != "\n":
+            if char != "\n" and char != "\r":
                 temp_analyse_text += char
         analyzed_text = temp_analyse_text
         # dic1 = {'analyzed_text' : analyzed_text, 'purpose' : "New Line Character is Removed"}
@@ -64,6 +64,8 @@ def analyze(request):
         temp = len(analyzed_text)
         analyzed_text = analyzed_text + " [count :" +str(temp)+"]"
     
+    if char_count != 'on' and capitalize != 'on' and remove_extraspace != 'on' and removenewline != 'on' and removepunc != 'on' :
+        return HttpResponse("Please select any operation and try again!!!!")
     dic1 = {'analyzed_text' : analyzed_text, 'purpose' : purpose}
     return render(request, 'analyze.html', dic1)
 def contact(request):
